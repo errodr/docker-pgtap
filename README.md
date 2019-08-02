@@ -50,11 +50,17 @@ Environment variables:
 
 Command line options:
 ```console
-$ docker run -i -t --rm --name pgtap hbpmip/pgtap:1.0.0-2 -H
+$ docker run -i -t --rm --name pgtap hbpmip/pgtap:1.0.0-2
 ```
 
 Options include:
 * `-v`: verbose
+* `-h <host>`: host to connect to
+* `-p <port>`: port to connect to
+* `-d <database>`: database name to connect to
+* `-u <user>`: user for the database connection
+* `-w <password>`: password for the database connection
+*  `-t <tests>`: list of test files to execute
 * `-a`: assume pgTap is already installed, do not install
 * `-k`: keep pgTap installed after tests, do not uninstall
 
@@ -64,6 +70,12 @@ This is useful mostly during test development.
 
 ```console
 $ docker run -i -t --rm --name pgtap --link db-under-test:db -e PASSWORD=postgres --entrypoint /install.sh hbpmip/pgtap:1.0.0-2
+```
+
+```console
+$ docker run -i -t --rm --name pgtap --link db-under-test:db -e PASSWORD=postgres -v /local/folder/with/tests/:/test hbpmip/pgtap:1.0.0-2 -a -k
+# hack hack
+$ docker run -i -t --rm --name pgtap --link db-under-test:db -e PASSWORD=postgres -v /local/folder/with/tests/:/test hbpmip/pgtap:1.0.0-2 -a -k
 ```
 
 ```console

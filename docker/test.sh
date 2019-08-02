@@ -1,11 +1,11 @@
-#!/bin/sh
+#!/bin/bash
 
 function usage() { echo "Usage: $0 -h host -d database -p port -u username -w password -t 'tests/*.sql' [-v] [-a] [-k]" 1>&2; exit 1; }
 
 VERBOSE=0
 INSTALL=1
 UNINSTALL=1
-while getopts d:h:p:u:w:b:n:t: OPTION
+while getopts d:h:p:u:w:t:vakH OPTION
 do
   case $OPTION in
     d)
@@ -40,7 +40,6 @@ do
       ;;
   esac
 done
-
 echo "Waiting for database..."
 dockerize -timeout 240s -wait tcp://$HOST:$PORT
 echo
