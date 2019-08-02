@@ -54,9 +54,9 @@ testing:
     - command: /tests/tesh.sh
 
 release_management:
-  current_version: 1.0.0-2
-  current_code_release: https://github.com/HBPMedical/docker-pgtap/archive/1.0.0-2.zip
-  current_docker_release: docker pull hbpmip/pgtap:1.0.0-2
+  current_version: 1.0.0-3
+  current_code_release: https://github.com/HBPMedical/docker-pgtap/archive/1.0.0-3.zip
+  current_docker_release: docker pull hbpmip/pgtap:1.0.0-3
   release_script: 'publish.sh'
 
 continuous_integration:
@@ -71,10 +71,10 @@ continuous_integration:
 distribution:
   docker_hub:
     name: hbpmip/pgtap
-    current_tag: 1.0.0-2
+    current_tag: 1.0.0-3
     url: https://hub.docker.com/r/hbpmip/pgtap/
     badge: https://img.shields.io/badge/docker-hbpmip%2Fpgtap-008bb8.svg
-    command: docker pull hbpmip/pgtap:1.0.0-2
+    command: docker pull hbpmip/pgtap:1.0.0-3
 
 planning:
   github:
