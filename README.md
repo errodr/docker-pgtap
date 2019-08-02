@@ -45,8 +45,30 @@ Environment variables:
 * PASSWORD=""
 * `TESTS="/test/*.sql"`
 * VERBOSE=0
+* INSTALL=1
+* UNINSTALL=1
 
-A full demonstration can be found at [harobed/poc-postgresql-pgTAP](https://github.com/harobed/poc-postgresql-pgTAP)
+Command line options:
+```console
+$ docker run -i -t --rm --name pgtap hbpmip/pgtap:1.0.0-2 -H
+```
+
+Options include:
+* `-v`: verbose
+* `-a`: assume pgTap is already installed, do not install
+* `-k`: keep pgTap installed after tests, do not uninstall
+
+### Installing/uninstalling pgtap into your database
+
+This is useful mostly during test development.
+
+```console
+$ docker run -i -t --rm --name pgtap --link db-under-test:db -e PASSWORD=postgres --entrypoint /install.sh hbpmip/pgtap:1.0.0-2
+```
+
+```console
+$ docker run -i -t --rm --name pgtap --link db-under-test:db -e PASSWORD=postgres --entrypoint /uninstall.sh hbpmip/pgtap:1.0.0-2
+```
 
 ## Build
 
@@ -56,9 +78,15 @@ Run: `./build.sh`
 
 Run: `./tests/test.sh`
 
+Additional dependencies:
+* docker-compose
+
 ## Publish on Docker Hub
 
 Run: `./publish.sh`
+
+Additional dependencies:
+* https://github.com/peritus/bumpversion
 
 ## License
 

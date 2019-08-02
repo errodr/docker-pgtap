@@ -21,8 +21,8 @@ RUN git clone git://github.com/theory/pgtap.git \
     && cd pgtap && git checkout tags/$PGTAP_VERSION \
     && make
 
-COPY docker/test.sh /test.sh
-RUN chmod +x /test.sh
+COPY docker/*.sh /
+RUN chmod +x /*.sh
 
 WORKDIR /
 
