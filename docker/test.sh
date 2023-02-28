@@ -66,7 +66,7 @@ if [[ $VERBOSE_TESTS == 1  ]] && [[ $JUNIT == 1 ]] ; then
 elif [[ $VERBOSE_TESTS == 1 ]] ; then
     PGPASSWORD=$PASSWORD pg_prove -h $HOST -p $PORT -d $DATABASE -U $USER -v $TESTS
 elif [[ $JUNIT == 1 ]] ; then
-    JUNIT_OUTPUT_FILE=/test/pgtap_tests_results.xml PGPASSWORD=$PASSWORD pg_prove -h $HOST -p $PORT -d $DATABASE -U $USER --harness TAP::Harness::JUnit $TESTS
+    JUNIT_OUTPUT_FILE=$JUNIT_TEST_RESULTS PGPASSWORD=$PASSWORD pg_prove -h $HOST -p $PORT -d $DATABASE -U $USER --harness TAP::Harness::JUnit $TESTS
 else
     PGPASSWORD=$PASSWORD pg_prove -h $HOST -p $PORT -d $DATABASE -U $USER $TESTS
 fi
