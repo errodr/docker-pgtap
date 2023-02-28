@@ -4,7 +4,7 @@ MAINTAINER Ludovic Claude <ludovic.claude@chuv.ch>
 
 ENV DOCKERIZE_VERSION=v0.6.1
 
-RUN apk add --no-cache --update curl wget postgresql-client postgresql-dev git openssl \
+RUN apk add --no-cache --update curl wget postgresql-client postgresql-dev git openssl expat-dev \
       build-base make perl perl-dev bash \
     && wget -O /tmp/dockerize.tar.gz https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-alpine-linux-amd64-${DOCKERIZE_VERSION}.tar.gz \
     && tar -C /usr/local/bin -xzvf /tmp/dockerize.tar.gz \
@@ -12,12 +12,11 @@ RUN apk add --no-cache --update curl wget postgresql-client postgresql-dev git o
     && apk del wget \
     && rm -rf /var/cache/apk/* /tmp/*
 
-# install pg_prove
-RUN cpan TAP::Parser::SourceHandler::pgTAP
+RUN cpan XML::Parser XML::Simple TAP::Parser::SourceHandler::pgTAP Test::Deep TAP::Harness::JUnit
 
 # install pgtap
-ENV PGTAP_VERSION v1.0.0
-RUN git clone git://github.com/theory/pgtap.git \
+ENV PGTAP_VERSION v1.2.0
+RUN git clone https://github.com/theory/pgtap.git \
     && cd pgtap && git checkout tags/$PGTAP_VERSION \
     && make
 
@@ -31,7 +30,10 @@ ENV DATABASE="" \
     PORT=5432 \
     USER="postgres" \
     PASSWORD="" \
-    TESTS="/test/*.sql"
+    TESTS="/test/*.sql" \
+    JUNIT=1 \
+    JUNIT_TEST_RESULTS="/test/pgtap_tests_results.xml" \
+    VERBOSE_TESTS=1
 
 ENTRYPOINT ["/test.sh"]
 CMD [""]
