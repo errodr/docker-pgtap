@@ -32,7 +32,7 @@ ENV DATABASE="" \
     PASSWORD="" \
     TESTS="/test/*.sql" \
     JUNIT=1 \
-    JUNIT_TEST_RESULTS="/test/pgtap_tests_results.xml" \
+    JUNIT_TEST_RESULTS="/test/results.xml" \
     VERBOSE_TESTS=1
 
 ENTRYPOINT ["/test.sh"]
